@@ -2,8 +2,6 @@
 
 **Multi-agent financial analysis powered by MLX DeepSeek with smart dual data strategy**
 
-## 🚀 Key Features
-
 ### 🧠 Multi-Agent AI System
 - **Fundamental Agent**: 50+ financial ratios, company health analysis
 - **Technical Agent**: Price trends, momentum indicators, volume analysis  
