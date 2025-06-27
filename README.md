@@ -1,51 +1,99 @@
-# 🤖 FinAgent - Multi-Agent Financial Analysis System
+# 🤖 FinAgent Pro - AI Financial Analysis Platform
 
-A free, local multi-agent financial analysis system powered by MLX (optimized for Apple Silicon) and yfinance for real-time financial data.
+**Multi-agent financial analysis powered by MLX DeepSeek with smart dual data strategy**
 
-## 🚀 Features
+## 🚀 Key Features
 
-### Multi-Agent Architecture
+### 🧠 Multi-Agent AI System
+- **Fundamental Agent**: 50+ financial ratios, company health analysis
+- **Technical Agent**: Price trends, momentum indicators, volume analysis  
+- **Sentiment Agent**: Real-time news sentiment and market psychology
+- **Economic Agent**: Macroeconomic climate assessment
+- **Supervisor Agent**: Investment synthesis and grade recommendations
 
-- 🔍 Fundamental Agent: Extracts financial ratios using free data sources
-- 💰 Profitability Agent: Analyzes ROA, ROE, profit margins with scoring
-- 💧 Liquidity Agent: Evaluates current ratio, quick ratio, debt-to-equity
-- 👔 Supervisor Agent: Generates comprehensive executive reports
-
-## Key Benefits
-
-- ✅ 100% Free: No API costs (uses yfinance + local MLX)
-- 🔒 Private: All analysis runs locally on your machine
-- ⚡ Fast: MLX-optimized for Apple Silicon
-- 📊 Visual: Interactive charts and professional reports
-- 📱 User-Friendly: Streamlit web interface
+### 📊 Smart Data Strategy
+- **Primary Source**: Yahoo Finance (unlimited, reliable)
+  - ✅ Financial statements, ratios, market data
+  - ✅ Technical indicators, price history
+  - ✅ Real-time quotes, no rate limits
+- **Enhanced Source**: Alpha Vantage (optional, cached)
+  - ⚡ News sentiment analysis  
+  - ⚡ Economic indicators (CPI, GDP, unemployment)
+  - ⚡ Advanced technical indicators
 
 
-
-Ensure your MLX model is in ~/mlx-models (or update the path in main.py)
-If you need to download a model:
+### Download MLX Model
+```bash
+# Download DeepSeek model (4-bit quantized for Apple Silicon)
+huggingface-cli download mlx-community/DeepSeek-R1-Distill-Qwen-14B-4bit --local-dir ~/mlx-models
 ```
-huggingface-cli download mlx-community/DeepSeek-R1-Distill-Qwen-14B-4bit --local-dir ~/mlx-models 
+
+### Alpha Vantage API Key
+```bash
+# Get free API key from: https://www.alphavantage.co/support/#api-key
+# Add to enhanced_agents.py line 1234 or set as environment variable
+export ALPHA_VANTAGE_API_KEY="your_key_here"
 ```
 
+### Run Application
+```bash
+streamlit run app.py
+```
 
-## 📈 Sample Analysis Output
-
-EXECUTIVE SUMMARY
-Apple (AAPL) demonstrates exceptional profitability with industry-leading margins 
-and strong asset utilization. However, liquidity metrics suggest potential 
-short-term constraints requiring management attention.
-
-OVERALL FINANCIAL HEALTH RATING: A-
-PROFITABILITY SCORE: 9.2/10
-LIQUIDITY SCORE: 6.8/10
-
-KEY RECOMMENDATIONS:
-1. Monitor current ratio improvement opportunities
-2. Leverage strong profitability for growth investments  
-3. Consider debt structure optimization
-
-## To run
+## 📊 Sample Output
 
 ```
-streamlit run main.py
+📈 AAPL - Investment Analysis
+═══════════════════════════════════════
+
+💰 FUNDAMENTAL ANALYSIS: 8.5/10
+- Revenue: $394.3B | ROE: 26.4% | D/E: 1.73
+- Strong profitability, moderate leverage
+
+📈 TECHNICAL ANALYSIS: 7.2/10  
+- RSI: 45.2 | Trend: Bullish above 20-day SMA
+- Volume confirmation, healthy momentum
+
+📰 SENTIMENT ANALYSIS: 6.8/10
+- Overall sentiment: Neutral-Positive
+- 247 articles analyzed, 78% relevance
+
+🌍 ECONOMIC CLIMATE: 6.5/10
+- GDP: 2.3% growth | Inflation: 3.1%
+- Mixed signals, Fed policy uncertainty
+
+🧠 INVESTMENT GRADE: B+ (7.8/10)
+RECOMMENDATION: BUY with 12-month target
+```
+
+## ⚠️ Alpha Vantage Free Tier Limitations
+
+### Rate Limits
+- **25 requests per day**
+- **5 requests per minute**
+- Requests reset at midnight EST
+
+### Available Data
+- ✅ Company overview, financial statements
+- ✅ Technical indicators (RSI, MACD, SMA)  
+- ✅ News sentiment analysis
+- ✅ Economic indicators (monthly updates)
+- ❌ Real-time intraday data
+- ❌ Options data, crypto data
+
+### Smart Caching Strategy
+- Economic data: **4-hour cache** (reduces daily API usage)
+- Sentiment data: **1-hour cache** (for active trading)
+- Company data: **Session cache** (until app restart)
+- Fallback analysis when rate limited
+
+## 📋 File Structure
+
+```
+FinAgent/
+├── app.py          # Main Streamlit application
+├── agents.py       # Multi-agent system core
+├── alpha_vantage_client.py  # API client with caching
+├── requirements.txt         # Python dependencies
+└── README.md               # This file
 ```
